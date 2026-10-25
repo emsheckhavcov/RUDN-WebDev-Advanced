@@ -1,4 +1,5 @@
 import type { Card } from "../../types/card";
+import { deleteCard } from "../../api/cards";
 import { useBoardFiltersStore } from "../../store/boardFiltersStore";
 import { BoardCard } from "../BoardCard/BoardCard";
 import styles from "./BoardColumn.module.css";
@@ -22,8 +23,10 @@ export function BoardColumn({ cards }: Props) {
         {visibleCards.map((card) => (
           <BoardCard
             key={card.id}
+            id={card.id}
             title={card.title}
             isDone={card.isDone}
+            onDelete={deleteCard}
           />
         ))}
       </div>
