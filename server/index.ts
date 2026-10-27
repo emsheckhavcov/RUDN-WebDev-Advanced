@@ -1,4 +1,4 @@
-import express from "express";
+import express, { type ErrorRequestHandler } from "express";
 
 const app = express();
 
@@ -46,6 +46,29 @@ app.post("/cards", (req, res) => {
   cards.push(newCard);
   res.status(201).json(newCard);
 });
+
+app.delete("/cards/:id", (req, res) => {
+  const cardIndex = cards.findIndex((card) => card.id === req.params.id);
+
+  if (cardIndex === -1) {
+    res.status(404).json({ error: `Карточка с id "${req.params.id}" не найдена` });
+    return;
+  }
+
+  cards.splice(cardIndex, 1);
+  res.status(204).end();
+});
+
+app.use((_req, res) => {
+  res.status(404).json({ error: "Маршрут не найден" });
+});
+
+const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => {
+  console.error("Необработанная ошибка сервера:", error);
+  res.status(500).json({ error: "Внутренняя ошибка сервера" });
+};
+
+app.use(errorHandler);
 
 app.listen(3001, () => {
   console.log("http://localhost:3001");
