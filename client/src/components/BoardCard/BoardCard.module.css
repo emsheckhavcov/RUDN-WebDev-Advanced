@@ -13,6 +13,19 @@
   gap: 12px;
 }
 
+.toggleButton {
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+}
+
+.toggleButton:disabled {
+  cursor: wait;
+}
+
 .deleteButton {
   flex-shrink: 0;
   border: 0;
