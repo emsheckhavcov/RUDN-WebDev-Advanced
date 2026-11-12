@@ -46,8 +46,8 @@ export function BoardCard({ id, title, isDone, onDelete }: BoardCardProps) {
           {completionMutation.isPending
             ? "Сохранение…"
             : isDone
-              ? "Снять отметку"
-              : "Отметить выполненной"}
+              ? "Вернуть"
+              : "Готово"}
         </button>
         <button
           className={styles.deleteButton}
