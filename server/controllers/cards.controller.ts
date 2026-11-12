@@ -19,9 +19,10 @@ export async function removeCard(
   req: Request,
   res: Response,
 ): Promise<void> {
-  const wasDeleted = await deleteCard(req.params.id);
+  const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+  const wasDeleted = await deleteCard(id);
   if (!wasDeleted) {
-    res.status(404).json({ error: `Карточка с id "${req.params.id}" не найдена` });
+    res.status(404).json({ error: `Карточка с id "${id}" не найдена` });
     return;
   }
 
