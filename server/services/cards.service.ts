@@ -43,3 +43,14 @@ export async function deleteCard(id: string): Promise<boolean> {
   cards.splice(cardIndex, 1);
   return true;
 }
+
+export async function updateCardDone(
+  id: string,
+  isDone: boolean,
+): Promise<Card | undefined> {
+  const card = cards.find((card) => card.id === id);
+  if (!card) return undefined;
+
+  card.isDone = isDone;
+  return card;
+}
